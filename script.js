@@ -1,4 +1,4 @@
-// الرابط العالمي الذي حصلت عليه من Pinggy
+// الرابط العالمي الخاص بك من Pinggy
 const TUNNEL_URL = "https://scysb-156-202-247-123.a.free.pinggy.link"; 
 
 const statusMsg = document.getElementById('status');
@@ -9,18 +9,19 @@ const uploadBtn = document.getElementById('upload-btn');
 // فحص الاتصال بالسيرفر في الموبايل
 async function checkConnection() {
     try {
+        // إضافة /status للتأكد من استجابة السيرفر
         const response = await fetch(TUNNEL_URL + "/status");
         if(response.ok) {
             statusMsg.innerText = "متصل أونلاين ✅";
             statusMsg.style.color = "#238636";
         }
     } catch (error) {
-        statusMsg.innerText = "أوفلاين (تأكد من فتح تطبيق الموبايل و Pinggy) ❌";
+        statusMsg.innerText = "أوفلاين (تأكد من بقاء تطبيق Pinggy مفتوحاً) ❌";
         statusMsg.style.color = "#da3633";
     }
 }
 
-// تنفيذ عملية الرفع عند الضغط على الزر
+// تنفيذ عملية الرفع
 uploadBtn.onclick = async () => {
     const html = document.getElementById('html-code').value;
     const css = document.getElementById('css-code').value;
@@ -31,19 +32,8 @@ uploadBtn.onclick = async () => {
     uploadBtn.innerText = "جاري الإرسال لسيرفر الموبايل...";
     uploadBtn.disabled = true;
 
-    // دمج الـ 3 سكريبتات في ملف واحد
-    const fullSource = `
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <style>${css}</style>
-</head>
-<body>
-    ${html}
-    <script>${js}<\/script>
-</body>
-</html>`;
+    // دمج السكريبتات في ملف index.html واحد
+    const fullSource = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body>${html}<script>${js}<\/script></body></html>`;
 
     try {
         const res = await fetch(TUNNEL_URL + "/upload", {
@@ -59,18 +49,11 @@ uploadBtn.onclick = async () => {
             uploadBtn.style.background = "#21262d";
         }
     } catch (e) {
-        alert("فشل الرفع! تأكد أن السيرفر يعمل.");
+        alert("فشل الرفع! تأكد أن السيرفر في هاتفك يستقبل البيانات.");
         uploadBtn.innerText = "إعادة المحاولة";
         uploadBtn.disabled = false;
     }
 };
 
-// وظيفة نسخ الرابط
-document.getElementById('copy-btn').onclick = () => {
-    finalUrlInput.select();
-    document.execCommand("copy");
-    alert("تم نسخ رابط موقعك بنجاح!");
-};
-
-// تشغيل الفحص عند فتح الصفحة
+// تشغيل الفحص
 checkConnection();
