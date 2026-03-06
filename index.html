@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Nano Hosting Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>لوحة استضافة نانو السحابية</h1>
+        <div id="status-bar">حالة السيرفر: <span id="status">جاري الفحص...</span></div>
+        
+        <div class="upload-section">
+            <textarea id="file-content" placeholder="انسخ سكريبت موقعك هنا (HTML/JS)..."></textarea>
+            <input type="text" id="file-name" placeholder="اسم الملف (مثلاً: index.html)">
+            <button id="upload-btn">رفع المشروع للسيرفر العالمي</button>
+        </div>
+
+        <div id="result-link" class="hidden">
+            <p>تم الرفع بنجاح! رابط موقعك العالمي هو:</p>
+            <a href="#" id="global-url" target="_blank"></a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
