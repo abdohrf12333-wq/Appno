@@ -1,5 +1,5 @@
 // ⚠️ هام: حط هنا رابط Localtonet العالمي بتاعك
-const TUNNEL_URL = "https://your-name.localltonet.com"; 
+const TUNNEL_URL = "https://scysb-156-202-247-123.a.free.pinggy.link"; 
 
 const statusMsg = document.getElementById('status');
 const linkContainer = document.getElementById('link-container');
