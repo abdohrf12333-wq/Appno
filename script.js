@@ -1,5 +1,5 @@
 // الرابط العالمي الخاص بك من Pinggy
-const TUNNEL_URL = "https://scysb-156-202-247-123.a.free.pinggy.link"; 
+const TUNNEL_URL = "https://testimonials-folding-ceiling-apartment.trycloudflare.com"; 
 
 const statusMsg = document.getElementById('status');
 const linkContainer = document.getElementById('link-container');
