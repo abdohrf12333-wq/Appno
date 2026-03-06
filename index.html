@@ -2,39 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Nano Hosting Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Hosting Pro | لوحة استضافة نانو</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>لوحة تحكم السيرفر العالمي</h1>
-        <div id="status-bar">الحالة: <span id="status">فحص الاتصال...</span></div>
-        
+        <header>
+            <h1>NANO GLOBAL HOSTING</h1>
+            <div id="status-bar">حالة الاتصال بالسيرفر: <span id="status">جاري الفحص...</span></div>
+        </header>
+
         <div class="input-grid">
             <div class="editor-box">
-                <label>سكريبت HTML</label>
-                <textarea id="html-code" placeholder="<html>...</html>"></textarea>
+                <label>HTML Code</label>
+                <textarea id="html-code" placeholder="أدخل كود الواجهة هنا..."></textarea>
             </div>
             <div class="editor-box">
-                <label>سكريبت CSS</label>
-                <textarea id="css-code" placeholder="body { ... }"></textarea>
+                <label>CSS Style</label>
+                <textarea id="css-code" placeholder="أدخل أكواد التصميم هنا..."></textarea>
             </div>
             <div class="editor-box">
-                <label>سكريبت JS</label>
-                <textarea id="js-code" placeholder="function() { ... }"></textarea>
+                <label>JavaScript</label>
+                <textarea id="js-code" placeholder="أدخل أكواد التفاعل هنا..."></textarea>
             </div>
         </div>
 
-        <button id="upload-btn">رفع المشروع وتوليد الرابط</button>
+        <button id="upload-btn">رفع المشروع وتوليد الرابط العالمي 🚀</button>
 
         <div id="link-container" class="link-card hidden">
-            <p>🚀 موقعك الآن حي على الإنترنت:</p>
+            <h3>✅ تم الرفع بنجاح!</h3>
+            <p>موقعك الآن متاح عالمياً عبر الرابط التالي:</p>
             <div class="url-wrapper">
                 <input type="text" id="final-url" readonly>
-                <button onclick="copyUrl()">نسخ</button>
+                <button id="copy-btn">نسخ الرابط</button>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
+    
