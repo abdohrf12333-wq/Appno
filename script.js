@@ -1,50 +1,56 @@
-// ضع هنا الرابط العالمي الذي حصلت عليه من تطبيق الموبايل
-const SERVER_URL = "https://YOUR-TUNNEL-URL.localltonet.com"; 
+// ⚠️ هام: حط هنا رابط Localtonet العالمي بتاعك
+const TUNNEL_URL = "https://your-name.localltonet.com"; 
 
-const uploadBtn = document.getElementById('upload-btn');
-const statusText = document.getElementById('status');
+const statusMsg = document.getElementById('status');
+const linkContainer = document.getElementById('link-container');
+const finalUrlInput = document.getElementById('final-url');
 
-// فحص هل السيرفر (الموبايل) متصل؟
-async function checkServer() {
+async function checkConnection() {
     try {
-        const res = await fetch(SERVER_URL + "/status");
-        if(res.ok) {
-            statusText.innerText = "متصل أونلاين ✅";
-            statusText.style.color = "#4CAF50";
-        }
-    } catch (e) {
-        statusText.innerText = "أوفلاين (تأكد من تشغيل التطبيق) ❌";
-        statusText.style.color = "#FF5252";
-    }
+        const r = await fetch(TUNNEL_URL + "/status");
+        if(r.ok) { statusMsg.innerText = "متصل أونلاين ✅"; statusMsg.style.color="#4CAF50"; }
+    } catch(e) { statusMsg.innerText = "أوفلاين (شغل الـ Tunnel) ❌"; statusMsg.style.color="#ff4444"; }
 }
 
-// وظيفة الرفع للموبايل
-uploadBtn.onclick = async () => {
-    const content = document.getElementById('file-content').value;
-    const name = document.getElementById('file-name').value;
+document.getElementById('upload-btn').onclick = async () => {
+    const html = document.getElementById('html-code').value;
+    const css = document.getElementById('css-code').value;
+    const js = document.getElementById('js-code').value;
 
-    if(!content || !name) return alert("امسح الخانات واكتب السكريبت واسم الملف");
-
-    uploadBtn.innerText = "جاري الرفع لسيرفر الموبايل...";
+    // تجميع الموقع في ملف واحد index.html لسهولة العرض
+    const fullSource = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>${css}</style>
+        </head>
+        <body>
+            ${html}
+            <script>${js}<\/script>
+        </body>
+        </html>
+    `;
 
     try {
-        const response = await fetch(SERVER_URL + "/upload", {
+        const res = await fetch(TUNNEL_URL + "/upload", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ fileName: name, fileData: content })
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ fileName: "index.html", fileData: fullSource })
         });
 
-        if (response.ok) {
-            document.getElementById('result-link').classList.remove('hidden');
-            document.getElementById('global-url').innerText = SERVER_URL + "/" + name;
-            document.getElementById('global-url').href = SERVER_URL + "/" + name;
-            uploadBtn.innerText = "تم الرفع بنجاح!";
+        if(res.ok) {
+            linkContainer.classList.remove('hidden');
+            finalUrlInput.value = TUNNEL_URL + "/index.html";
+            alert("تم الرفع للسيرفر العالمي!");
         }
-    } catch (error) {
-        alert("فشل الرفع: تأكد أن السيرفر في الموبايل يعمل");
-        uploadBtn.innerText = "إعادة المحاولة";
-    }
+    } catch(e) { alert("خطأ في الاتصال بالسيرفر"); }
 };
 
-checkServer();
-  
+function copyUrl() {
+    finalUrlInput.select();
+    document.execCommand("copy");
+    alert("تم نسخ الرابط!");
+}
+
+checkConnection();
+                
